@@ -1,0 +1,32 @@
+<div class="flex items-center justify-center min-h-screen bg-cover bg-center" style="background-image: url(assets/auth/hotel1.jpg);">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="w-full max-w-md p-6 bg-white shadow-md rounded-lg">
+    <h2 class="text-3xl font-bold mb-6 text-center">Iniciar Sesion</h2>
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>Correo electrónico</mat-label>
+      <input matInput formControlName="email" required class="w-full">
+      @if (email?.invalid && email?.touched) {
+      <mat-error >
+        El correo electrónico es obligatorio
+      </mat-error>
+    }
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>Contraseña</mat-label>
+      <input matInput type="password" formControlName="password" required class="w-full">
+      @if (password?.invalid && password?.touched) {
+      <mat-error *ngIf="password?.invalid && password?.touched">
+        La contraseña es obligatoria
+      </mat-error>
+    }
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid" class="w-full">
+      Iniciar sesión
+    </button>
+    <span>No tienes cuenta?<button mat-button (click)="register()">Registrar</button></span>
+  </form>
+
+</div>
+
+

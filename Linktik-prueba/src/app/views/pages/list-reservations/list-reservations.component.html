@@ -1,0 +1,84 @@
+<div class="p-4">
+
+  <div class="flex items-center justify-between w-full mb-4">
+    <div class="flex-grow flex justify-center">
+      <mat-form-field class="w-full max-w-md flex items-center justify-center rounded-lg overflow-hidden">
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Buscar reservación" class="rounded-lg">
+        <mat-icon matSuffix class="text-gray-400">search</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" (click)="navigateToNew()" class="bg-blue-500 text-white ml-4">
+      Nueva Reservación
+    </button>
+  </div>
+
+  <div class="overflow-hidden rounded-lg shadow-md">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-full max-w-3xl mx-auto bg-gray-50 border border-gray-200 rounded-lg">
+
+      <ng-container matColumnDef="Nombre">
+        <th mat-header-cell *matHeaderCellDef  style="background-color: #2b4bb4; color: white; font-weight: bold; text-align: center;"> Nombre </th>
+        <td mat-cell *matCellDef="let element" style="color: #4b5563; text-align: center;"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Telefono">
+        <th mat-header-cell *matHeaderCellDef style="background-color: #2b4bb4; color: white; font-weight: bold; text-align: center;"> Teléfono </th>
+        <td mat-cell *matCellDef="let element" style="color: #4b5563; text-align: center;"> {{element.phone}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Correo">
+          <th mat-header-cell *matHeaderCellDef style="background-color: #2b4bb4; color: white; font-weight: bold; text-align: center;"> Correo </th>
+        <td mat-cell *matCellDef="let element" style="color: #4b5563; text-align: center;"> {{element.email}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Inicio">
+        <th mat-header-cell *matHeaderCellDef style="background-color: #2b4bb4; color: white; font-weight: bold; text-align: center;"> Inicio </th>
+        <td mat-cell *matCellDef="let element" style="color: #4b5563; text-align: center;"> {{element.start_time | date: 'fullDate'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Fin">
+        <th mat-header-cell *matHeaderCellDef style="background-color: #2b4bb4; color: white; font-weight: bold; text-align: center;"> Fin </th>
+        <td mat-cell *matCellDef="let element" style="color: #4b5563; text-align: center;"> {{element.end_time | date: 'fullDate'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Precio">
+        <th mat-header-cell *matHeaderCellDef style="background-color: #2b4bb4; color: white; font-weight: bold; text-align: center;"> Precio </th>
+        <td mat-cell *matCellDef="let element" style="color: #4b5563; text-align: center;"> {{element.total_price}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Cuarto">
+        <th mat-header-cell *matHeaderCellDef style="background-color: #2b4bb4; color: white; font-weight: bold; text-align: center;"> Cuarto </th>
+        <td mat-cell *matCellDef="let element" style="color: #4b5563; text-align: center;"> {{element.room_number}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Disponibilidad">
+        <th mat-header-cell *matHeaderCellDef style="background-color: #2b4bb4; color: white; font-weight: bold; text-align: center;"> Disponibilidad </th>
+        <td mat-cell *matCellDef="let element" style="color: #4b5563; text-align: center;"> {{element.status_name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Acciones">
+        <th mat-header-cell *matHeaderCellDef style="background-color: #2b4bb4; color: white; font-weight: bold; text-align: center;"> Acciones </th>
+        <td mat-cell *matCellDef="let element" style="color: #4b5563; text-align: center;">
+          <button mat-icon-button color="accent" (click)="edit(element)" aria-label="Editar" matTooltip="Editar">
+            <i class="mdi mdi-pencil text-2xl" style="color: blue;"></i>
+          </button>
+          <button mat-icon-button color="warn" (click)="delete(element)" aria-label="Eliminar" matTooltip="Eliminar">
+            <i class="mdi mdi-trash-can text-2xl" style="color: red;"></i>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="hover:bg-gray-200"></tr>
+    </table>
+
+    <!-- Add paginator here -->
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons
+                   aria-label="Select page of reservations"
+                   style="background-color: #2b4bb4; color: white;"
+                   class="text-white">
+    </mat-paginator>
+  </div>
+</div>
+
